@@ -12,20 +12,43 @@ app.use(cors({
 
 app.use(express.json())
 
-const apiUrl = 'https://api.hgbrasil.com/weather?key=ba94c742&city_name=Recife,PE';  // Your weather API URL
+const apiUrl = 'https://api.hgbrasil.com/weather?key=ba94c742&city_name=Recife,PE';
 
 // Endpoint to proxy the weather API request
 app.get('/weather', async (req, res) => {
-  console.log('Received request');
+  // console.log('Received request');
   try {
     const response = await axios.get(apiUrl);
-    console.log('Weather data fetched successfully');
+    // console.log('Weather data fetched successfully');
     res.json(response.data);
   } catch (error) {
     console.error('Error fetching weather data:', error);  // Log error details
     res.status(500).json({ error: 'Error fetching weather data' });
   }
 });
+
+app.get("/proxy-icon", async (req, res) => {
+  try {
+    const { condition } = req.query;
+
+    // fallback to "rain" if nothing is provided
+    const icon = condition;
+
+    const url = `https://assets.hgbrasil.com/weather/icons/conditions/${icon}.svg`;
+
+    const response = await axios.get(url, {
+      responseType: "text",
+    });
+
+    res.setHeader("Content-Type", "image/svg+xml");
+    res.send(response.data);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Error fetching SVG");
+  }
+});
+
+
 // app.get('/weather', async (req, res) => {
 //   try {
 //     // Make a request to the weather API

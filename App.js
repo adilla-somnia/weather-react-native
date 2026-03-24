@@ -1,7 +1,5 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
-import LoginScreen from './screens/LoginScreen';
-import AddContactButton from './components/AddContactButton';
 import WeatherForecast from './screens/WeatherForecast';
 
 const Stack = createNativeStackNavigator();
