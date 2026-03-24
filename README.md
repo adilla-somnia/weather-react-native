@@ -38,6 +38,6 @@ Opcional: você pode ativar a requisição de API no projeto entrando na screen 
 
 ## Imagens
 
-![iOS](./assets/screenshots/ios_from_mock.PNG)
+![iOS](./assets/screenshots/ios_from_mock_resized.PNG)
 
 ![web](./assets/screenshots/web_from_api.png)
